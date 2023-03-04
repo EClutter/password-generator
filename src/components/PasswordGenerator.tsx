@@ -1,20 +1,24 @@
 import { h, Fragment } from "preact";
 import { useState } from "preact/hooks";
 
-export default function Counter({ children, password }) {
+export default function PasswordGenerator({ children, password }) {
   const [lowerCase, setLowerCase] = useState(true);
   const [upperCase, setUpperCase] = useState(true);
   const [specialCharacters, setSpecialCharacters] = useState(true);
   const [numbers, setNumbers] = useState(true);
+  const [length, setLength] = useState(16);
 
   const generatePassword = () => {
     console.log("Generating New Password");
-    password.value = makeid(16);
+    password.value = makeid(length);
     console.log("New Password: " + password);
   };
 
+  const handleSliderChange = (event) => {
+    setLength(event.target.value);
+  };
+
   function makeid(length) {
-    
     let result = "";
     let characters = "";
     if (upperCase) {
@@ -29,8 +33,8 @@ export default function Counter({ children, password }) {
     if (specialCharacters) {
       characters += addSpecialCharacters();
     }
-    if(characters == ""){
-      alert("Please select some criteria ")
+    if (characters == "") {
+      alert("Please select some criteria ");
     }
     let counter = 0;
     const charactersLength = characters.length;
@@ -111,6 +115,21 @@ export default function Counter({ children, password }) {
           >
             Upper Case
           </label>
+        </div>
+        <div class=" pl-4 border border-gray-200 rounded dark:border-gray-700 p-2 m-2">
+          <label
+            for="large-range"
+            class="block mb-2 text-xl font-medium text-gray-900 dark:text-white"
+          >
+            Value: {length}
+          </label>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={length}
+            onChange={handleSliderChange}
+          />
         </div>
       </div>
     </div>

@@ -1,13 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Counter from "../components/Counter.tsx";
+import PasswordGenerator from "../components/PasswordGenerator.tsx";
 import { signal } from "@preact/signals";
 
 const password = signal("45ncsi9!@mkd$");
 ---
 
 <Layout title="Generate Password">
-  <main class="container bg-center bg-no-repeat bg-cover md:max-w-none text-center mt-16">
+  <main class="container bg-center bg-no-repeat bg-cover md:max-w-none text-center mt-32">
     <div class="flex flex-col items-center ">
 		<div class="order-1 w-full">
       <h1
@@ -15,9 +15,8 @@ const password = signal("45ncsi9!@mkd$");
       >
         <span class="text-blue-600 dark:text-blue-500">Generate</span> Password
       </h1>
-      <Counter password={password} client:visible>
-        <h1>Hello, Preact 1!</h1>
-      </Counter>
+      <PasswordGenerator password={password} client:visible>
+      </PasswordGenerator>
 		</div>
     </div>
   </main>
