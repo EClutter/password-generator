@@ -28,27 +28,18 @@ export default function PasswordGenerator({ children, password }) {
 
   function makeid(length) {
     let result = "";
-    let characters = "";
-    if (upperCase) {
-      characters += addUpperCase();
+    const characters =
+      (upperCase ? addUpperCase() : "") +
+      (lowerCase ? addLowerCase() : "") +
+      (numbers ? addNumbers() : "") +
+      (specialCharacters ? addSpecialCharacters() : "");
+    if (!characters) {
+      alert("Please select some criteria");
+      return "";
     }
-    if (lowerCase) {
-      characters += addLowerCase();
-    }
-    if (numbers) {
-      characters += addNumbers();
-    }
-    if (specialCharacters) {
-      characters += addSpecialCharacters();
-    }
-    if (characters == "") {
-      alert("Please select some criteria ");
-    }
-    let counter = 0;
     const charactersLength = characters.length;
-    while (counter < length) {
+    for (let i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
-      counter += 1;
     }
     return result;
   }
